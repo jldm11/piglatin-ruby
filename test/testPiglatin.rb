@@ -102,5 +102,30 @@ RSpec.describe "Piglatin" do
 
 			end
 		end
+
+		describe "method 'translate'" do
+			sentence =  ""
+			piglatin = Piglatin.new(sentence)
+
+			it "should exists" do
+				expect(piglatin).to respond_to(:translate)
+			end
+
+			it "should return the sentence translated to piglatin" do
+				expect(piglatin.translate()).to eq(nil)
+				
+				piglatin.sentence = "Hello my friends this is my new: car!"
+				expect(piglatin.translate()).to eq("Ellohay myay iendsfray isthay isay myay ewnay: arcay!")
+				
+				piglatin.sentence =  "What do you think when you hear 'well-being'?"
+				expect(piglatin.translate()).to eq("Atwhay oday ouyay inkthay enwhay ouyay earhay 'ellway-eingbay'?")
+				
+				piglatin.sentence =  "I love analyze any problems"
+				expect(piglatin.translate()).to eq("Iyay ovelay analyzeyay anynay oblemspray")
+
+				piglatin.sentence = "I've missed more than 9000 shots in my career. I've lost almost 300 games. 26 times, I've been trusted to take the game winning shot and missed. I've failed over and over and over again in my life!. And that is why I succeed."
+				expect(piglatin.translate()).to eq("Iyay'evay issedmay oremay anthay 9000 otsshay inay myay areercay. Iyay'evay ostlay almostay 300 amesgay. 26 imestay, Iyay'evay eenbay ustedtray otay aketay ethay amegay inningway otshay anday issedmay. Iyay'evay ailedfay overay anday overay anday overay againay inay myay ifelay!. Anday atthay isay whyay Iyay ucceedsay.")
+			end
+		end
 	end
 end

@@ -11,6 +11,25 @@ class Piglatin
 			return @sentence
 		end	
 
+		def translate()
+			#Return nil if sentence is empty
+			if(@sentence.empty?)
+				return nil
+			end
+
+			translatedSentence = ""
+
+			#Create the dictionary to know the translations
+			dictionary = createDictionary()
+
+			#Replace every word with its translation
+			dictionary.each do |englishWord, pigLatinWord|
+				translatedSentence = @sentence.gsub!(/\b#{englishWord}\b/, pigLatinWord)
+			end
+
+			return translatedSentence
+		end
+
 	private
 		def createDictionary()
 			#Split the sentence in words
