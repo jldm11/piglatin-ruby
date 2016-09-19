@@ -24,14 +24,37 @@ RSpec.describe "Piglatin" do
 	end
 
 	describe "object" do
-		sentence =  "Hello my friends"
-		piglatin = Piglatin.new(sentence)
-		it "should have a method named 'phrase'" do
-			expect(piglatin).to respond_to(:phrase)
+		describe "method 'phrase'" do
+			sentence =  "Hello my friends"
+			piglatin = Piglatin.new(sentence)
+
+			it "should exists" do
+				expect(piglatin).to respond_to(:phrase)
+			end
+
+			it "should return the sentence" do
+				expect(piglatin.phrase).to eq("Hello my friends")
+			end
 		end
 
-		it "should have the method phrase but it needs to return the sentence" do
-			expect(piglatin.phrase).to eq("Hello my friends")
+		describe "method 'translateWord'" do
+			sentence =  "Hello my friends"
+			piglatin = Piglatin.new(sentence)
+
+			it "should exists 'translateWord'" do
+				expect {piglatin.send(:translateWord)}.not_to raise_error(NoMethodError)
+			end
+
+			it "should receive an english word and return it in pig latin" do
+				expect(piglatin.send(:translateWord,"Hello")).to eq("Ellohay")
+				expect(piglatin.send(:translateWord,"Well")). to eq("Ellway")
+				expect(piglatin.send(:translateWord,"think")).to eq("inkthay")
+				expect(piglatin.send(:translateWord,"welcome")).to eq("elcomeway")
+				expect(piglatin.send(:translateWord,"known")).to eq("ownknay")
+				expect(piglatin.send(:translateWord,"enough")).to eq("enoughay")
+				expect(piglatin.send(:translateWord,"any")).to eq("anynay")
+				expect(piglatin.send(:translateWord,"special")).to eq("ecialspay")
+			end
 		end
 	end
 end
