@@ -39,9 +39,7 @@ class Piglatin
 			dictionary = Hash.new("")
 			words.each do |word|
 				#Omit translate if contains numbers
-				if(word =~ /\d/)
-					next
-				end
+				next if word =~ /\d/
 				#Get the translation
 				dictionary[word] = translateWord(word)
 			end
@@ -84,9 +82,7 @@ class Piglatin
 				consonants = ""
 				englishWord.each_char do |letter|
 					isVowel = vowels.include? letter.downcase
-					if(isVowel)
-						break
-					end
+					break if isVowel
 					consonants += letter
 				end
 
