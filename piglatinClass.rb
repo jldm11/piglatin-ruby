@@ -12,6 +12,24 @@ class Piglatin
 		end	
 
 	private
+		def createDictionary()
+			#Split the sentence in words
+			words = @sentence.split(/\W+/)
+
+			#The dictionary is a hash where the key is the english word and the value its piglatin translation
+			dictionary = Hash.new("")
+			words.each do |word|
+				#Omit translate if contains numbers
+				if(word =~ /\d/)
+					next
+				end
+				#Get the translation
+				dictionary[word] = translateWord(word)
+			end
+
+			return dictionary
+		end
+
 		#This function returns the translation of the word in piglatin language
 		def translateWord(englishWord)
 			pigLatinWord = ""

@@ -41,7 +41,7 @@ RSpec.describe "Piglatin" do
 			sentence =  "Hello my friends"
 			piglatin = Piglatin.new(sentence)
 
-			it "should exists 'translateWord'" do
+			it "should exists" do
 				expect {piglatin.send(:translateWord)}.not_to raise_error(NoMethodError)
 			end
 
@@ -54,6 +54,52 @@ RSpec.describe "Piglatin" do
 				expect(piglatin.send(:translateWord,"enough")).to eq("enoughay")
 				expect(piglatin.send(:translateWord,"any")).to eq("anynay")
 				expect(piglatin.send(:translateWord,"special")).to eq("ecialspay")
+			end
+		end
+
+		describe "method 'createDictionary'" do
+			sentence =  "Hello my friends this is my new: car!"
+			piglatin = Piglatin.new(sentence)
+
+			it "should exists" do
+				expect {piglatin.send(:createDictionary)}.not_to raise_error(NoMethodError) 
+			end
+
+			it "should return a hash with the english words contained in the sentence and their translations" do
+				
+				expect(piglatin.send(:createDictionary)).to include(
+					"Hello" => "Ellohay",
+					"my" => "myay",
+					"friends" => "iendsfray",
+					"this" => "isthay",
+					"is" => "isay",
+					"new" => "ewnay",
+					"car" => "arcay"
+				)
+
+				piglatin.sentence = "What do you think when you hear 'well-being'?"
+
+				expect(piglatin.send(:createDictionary)).to include(
+					"What" => "Atwhay",
+					"do" => "oday",
+					"you" => "ouyay",
+					"think" => "inkthay",
+					"when" => "enwhay",
+					"hear" => "earhay",
+					"well" => "ellway",
+					"being" => "eingbay"
+				)
+
+				piglatin.sentence = "I love analyze any problems"
+
+				expect(piglatin.send(:createDictionary)).to include(
+					"I" => "Iyay",
+					"love" => "ovelay",
+					"analyze" => "analyzeyay",
+					"any" => "anynay",
+					"problems" => "oblemspray"
+				)
+
 			end
 		end
 	end
